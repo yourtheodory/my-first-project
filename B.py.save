@@ -1,0 +1,30 @@
+class Queue:
+    def __init__(self):
+        self.in_stack = []
+        self.out_stack = []
+    def enqueue(self, value):
+        self.in_stack.append(value)
+    def dequeue(self):
+        if not self.out_stack:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+        return self.out_stack.pop()
+    def peek(self):
+        if not self.out_stack:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+        return self.out_stack[-1]
+    def empty(self):
+        return not self.in_stack and not self.out_stack
+    def size(self):
+        return len(self.in_stack) + len(self.out_stack)
+queue = Queue()
+queue.enqueue(1)
+queue.enqueue(2)
+queue.enqueue(3)
+print(queue.peek())
+print(queue.dequeue())
+print(queue.dequeue())
+queue.enqueue(4)
+print(queue.dequeue())
+print(queue.dequeue())
